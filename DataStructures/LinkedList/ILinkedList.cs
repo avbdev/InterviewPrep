@@ -2,9 +2,9 @@ namespace InterviewPrep
 {
     public interface ILinkedList<T>
 	{
-        void InsertAtFront(T data);
-
-        void InsertAfterNode(Node<T> prev, T data);
+		void InsertAtFront(T data);
+		
+		void InsertAfterNode(Node<T> prev, T data);
 		
 		void InsertNodeAtEnd(T data);
 
