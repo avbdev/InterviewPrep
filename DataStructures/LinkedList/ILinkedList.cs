@@ -1,19 +1,19 @@
 namespace InterviewPrep
 {
     public interface ILinkedList<T>
-	{
-		void InsertAtFront(T data);
-		
-		void InsertAfterNode(Node<T> prev, T data);
-		
-		void InsertNodeAtEnd(T data);
+    {
+        void InsertAtFront(T data);
 
-		int Size();
+        void InsertAfterNode(Node<T> prev, T data);
 
-		void DeleteNode(T Node);
+        void InsertNodeAtEnd(T data);
 
-		void DeleteNodeAtEnd(T Node);
+        int Size();
 
-		bool FindDuplicates();
-	}
+        void DeleteNode(T Node);
+
+        void DeleteNodeRecursive(Node<T> head, T key);
+
+        bool FindDuplicates();
+    }
 }
