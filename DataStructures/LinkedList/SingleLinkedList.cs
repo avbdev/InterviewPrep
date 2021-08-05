@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace InterviewPrep
 {
@@ -67,6 +68,7 @@ namespace InterviewPrep
             if (this.head == null)
             {
                 this.head = new_node;
+                this.size++;
                 return;
             }
 
@@ -127,8 +129,8 @@ namespace InterviewPrep
             {
                 var current = head;
                 head = head.next;
-                this.size--;
                 this.head = head;
+                this.size--; // Optional
                 return;
             }
 
@@ -165,6 +167,36 @@ namespace InterviewPrep
             }
 
             Console.WriteLine();
+        }
+
+        /// <summary>
+        ///	Removes duplicates in a LinkedList.
+        /// </summary>
+        public void RemoveDups(LinkedList<T> list)
+        {
+            if (list == null) return;
+
+            var uniqueNodes = new HashSet<T>();
+            Node<T> current = list.head, prev = null;
+
+            while (current != null)
+            {
+                if (uniqueNodes.Contains(current.data))
+                {
+                    prev.next = current.next;
+
+                }
+                else
+                {
+                    uniqueNodes.Add(current.data);
+                    prev = current;
+                }
+
+
+                current = current.next;
+
+            }
+
         }
 
         /// <summary>

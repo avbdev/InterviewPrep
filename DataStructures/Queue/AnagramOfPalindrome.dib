@@ -1,0 +1,27 @@
+#!csharp
+
+bool AnagramOfPalindrome (string s) {
+Dictionary<char, int> dict = new Dictionary<char,int>();
+int oddCounter = 0;
+
+foreach(char c in s) {
+	if(dict.ContainsKey(c)){
+		dict[c]++;
+	
+		if(dict[c] % 2 == 0) oddCounter--;
+		else oddCounter++;
+	}
+
+	else 
+	{
+		dict[c] = 1;
+		oddCounter++;		
+	}
+}
+
+return oddCounter < 2;
+}
+
+
+var x = AnagramOfPalindrome("aabbccddaabaxbxa");
+Console.WriteLine(x);

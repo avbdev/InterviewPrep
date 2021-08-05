@@ -7,26 +7,130 @@ namespace InterviewPrep
     {
         static void Main(string[] args)
         {
+            int[] arr = new int[] { 5, 9, 2, 1, 0, 6 };
+            Console.WriteLine("Initial Arr");
+            foreach (int i in arr)
+            {
+                Console.Write($"{i},");
+            }
+            Console.WriteLine();
+            InsertionSort(arr);
+            Console.WriteLine();
+            Console.WriteLine("Sorted Arr");
+            foreach (int i in arr)
+            {
+
+                Console.Write($"{i},");
+            }
+            Console.WriteLine();
             // LinkedListMethods();
             // StackMethods();
             // QueueMethods();
             // LinkedListBuiltIn();
-            MaxStackImpl();
+            // MaxStackImpl();
         }
+
+        public static void InsertionSort(int[] arr)
+        {
+
+            for (int j = 1; j < arr.Length; j++)
+            {
+                Console.WriteLine($"j:{j}");
+                int key = arr[j], i = j - 1;
+                Console.WriteLine($"arr[j]:{arr[j]}, key:{key}, arr[i]:{arr[i]}");
+
+                while (i >= 0 && arr[i] > key)
+                {
+                    Console.WriteLine($"arr[i+1]:{arr[i + 1]}");
+                    arr[i + 1] = arr[i];
+                    i--;
+
+                }
+                arr[i + 1] = key;
+                Console.WriteLine($"After While arr[i+1]:{arr[i + 1]}");
+            }
+
+        }
+
+        public static List<int> GetKthFrequent(int[] arr, int k)
+        {
+
+            var freqCounter = new Dictionary<int, int>();
+            var counterOccurrencesDict = new Dictionary<int, List<int>>();
+
+            // Insert values and its count to the dictionary
+            foreach (int ele in arr)
+            {
+                if (freqCounter.ContainsKey(ele)) freqCounter[ele]++;
+                else freqCounter[ele] = 1;
+            }
+
+
+            // Dict --> {frq: HashSet<inputOccurences>}
+            // We need an ele which is kth largest freq.
+            // {frq: [inputOccurences] }
+            // {3 : {1,2}, 2: {4,5,6}, 8:{32}}
+
+            foreach (var kvp in freqCounter)
+            {
+                // value = key[set] = actual freq.
+                if (counterOccurrencesDict.ContainsKey(kvp.Value))
+                    counterOccurrencesDict[kvp.Value].Add(kvp.Key);
+                else
+                {
+                    counterOccurrencesDict[kvp.Value] = new List<int>();
+                    counterOccurrencesDict[kvp.Value].Add(kvp.Key);
+                }
+            }
+
+            var keys = new List<int>(counterOccurrencesDict.Keys).ToArray();
+
+            Array.Sort(keys);
+
+            /*
+                coll = {
+                    1:{}
+                    2:{}
+                    3:{}
+                    4:{}
+                }
+
+                We need 2nd Largest ==> 3 ==> coll.Count  = 4, k = 2 => Count - k = 2
+            */
+
+            var selectedKey = keys[keys.Length - k + 1];
+            // Sort the keys in the dictionary
+
+            return counterOccurrencesDict[selectedKey];//.ToList();
+
+        }
+
 
         static void LinkedListMethods()
         {
 
+
             var ll = new LinkedList<int>();
 
-            ll.InsertNodeAtEnd(5);
-            ll.InsertNodeAtEnd(6);
-            ll.InsertNodeAtEnd(7);
-            ll.InsertNodeAtEnd(8);
+            ll.InsertNodeAtEnd(2);
             ll.InsertNodeAtEnd(9);
+            ll.InsertNodeAtEnd(2);
+            ll.InsertNodeAtEnd(4);
+            ll.InsertNodeAtEnd(4);
+            ll.InsertNodeAtEnd(8);
+            // ll.InsertNodeAtEnd(2);
+            // ll.InsertNodeAtEnd(2);
+            // ll.InsertNodeAtEnd(2);
+            // ll.InsertNodeAtEnd(2);
+            // ll.InsertNodeAtEnd(2);
+            // ll.InsertNodeAtEnd(2);
 
-            var sumPairexist = SumPairExists(null, 54);
 
+            // var sumPairexist = SumPairExists(null, 54);
+
+            ll.PrintList();
+
+            ll.RemoveDups(ll);
             ll.PrintList();
 
             // ll.InsertAtFront(88);
